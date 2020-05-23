@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Task2 {
-    public static void main(String[] args) throws IOException {
+    public void run() throws IOException {
 
         Scanner sc = new Scanner(new BufferedReader(new FileReader
                 (".\\src\\transactions.csv")));
@@ -36,10 +36,19 @@ public class Task2 {
         }
 
         // список сколько раз купили продукт (всего, среди всех покупок) в корзине  №3
+        int sum = 0;  // весь доход
+        int sumLess30 = 0; // доход, если применим стратегию для продуктов, которые купили меньше 30 раз
+        int sum30 = 0; // доход, если не применим стратегию для продуктов, которые купили меньше 30 раз
         for (Map.Entry<String, String > a : hashMap1.entrySet()) {
             String[] str = a.getValue().split(" ");
             for (int i = 0; i < str.length; i++) {
                 out1.print(hashMap.get(str[i]) + " ");
+                sum += hashMap.get(str[i]);
+                if (hashMap.get(str[i]) <= 30) {
+                    sum30 += hashMap.get(str[i]);  //
+                    sumLess30 += hashMap.get(str[i]) + 20;
+
+                }
             }
             out1.print("\n");
 
@@ -64,6 +73,6 @@ public class Task2 {
         }
         out.close();
         out1.flush();
-
+        System.out.println(sum + " " + sumLess30 + " " + sum30);
     }
 }
